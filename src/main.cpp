@@ -16,6 +16,7 @@
 #include "KOReaderCredentialStore.h"
 #include "MappedInputManager.h"
 #include "RecentBooksStore.h"
+#include "activities/bluetooth/KavitaMangaReaderActivity.h"
 #include "activities/boot_sleep/BootActivity.h"
 #include "activities/boot_sleep/SleepActivity.h"
 #include "activities/browser/OpdsBookBrowserActivity.h"
@@ -242,6 +243,11 @@ void onGoToMyLibraryWithPath(const std::string& path) {
   enterNewActivity(new MyLibraryActivity(renderer, mappedInputManager, onGoHome, onGoToReader, path));
 }
 
+void onGoToKavitaMangaReader() {
+  exitActivity();
+  enterNewActivity(new KavitaMangaReaderActivity(renderer, mappedInputManager, onGoHome));
+}
+
 void onGoToBrowser() {
   exitActivity();
   enterNewActivity(new OpdsBookBrowserActivity(renderer, mappedInputManager, onGoHome));
@@ -250,7 +256,7 @@ void onGoToBrowser() {
 void onGoHome() {
   exitActivity();
   enterNewActivity(new HomeActivity(renderer, mappedInputManager, onGoToReader, onGoToMyLibrary, onGoToRecentBooks,
-                                    onGoToSettings, onGoToFileTransfer, onGoToBrowser));
+                                    onGoToSettings, onGoToFileTransfer, onGoToKavitaMangaReader, onGoToBrowser));
 }
 
 void setupDisplayAndFonts() {
